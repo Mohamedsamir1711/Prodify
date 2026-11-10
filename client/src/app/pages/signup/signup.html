@@ -1,0 +1,73 @@
+<app-navbar></app-navbar>
+<div class="container mb-5 mt-5">
+  <h1 class='text-center text-primary '>Sign Up</h1>
+  <p class='text-center text-primary'>Create your account to start shopping!</p>
+  <form #signupForm="ngForm" (ngSubmit)='submit(signupForm)'>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" #username="ngModel" [(ngModel)]="user.username" placeholder="Enter your username" [class.is-invalid]="username.invalid && username.touched" required minlength="3" maxlength="20">
+   @if (username.invalid && username.touched) {
+  <div>
+    @if (username.hasError("required")) {
+    <small class="text-danger">username is required.</small>
+  }
+    @if (username.hasError("minlength")) {
+    <small class="text-danger">username must be at least 6 chars.</small>
+  }
+    @if (username.hasError("maxlength")) {
+    <small class="text-danger">username must be no more than 30 chars.</small>
+  }
+</div>}
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="Enter your email" [class.is-invalid]="email.invalid && email.touched" required minlength="6" maxlength="30">
+      @if (email.invalid && email.touched) {
+  <div>
+    @if (email.hasError("required")) {
+    <small class="text-danger">Email is required.</small>
+  }
+    @if (email.hasError("minlength")) {
+    <small class="text-danger">Email must be at least 6 chars.</small>
+  }
+    @if (email.hasError("maxlength")) {
+    <small class="text-danger">Email must be no more than 30 chars.</small>
+  }
+</div>}
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Enter your password" [class.is-invalid]="password.invalid && password.touched" required minlength="6">
+       @if (password.invalid && password.touched) {
+  <div>
+    @if (password.hasError("required")) {
+    <small class="text-danger">password is required.</small>
+  }
+    @if (password.hasError("minlength")) {
+    <small class="text-danger">password must be at least 6 chars.</small>
+  }
+    @if (password.hasError("maxlength")) {
+    <small class="text-danger">password must be no more than 30 chars.</small>
+  }
+</div>}
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword" placeholder="Confirm your password" [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched" required minlength="6">
+     @if (confirmPassword.invalid && confirmPassword.touched) {
+  <div>
+    @if (confirmPassword.hasError("required")) {
+    <small class="text-danger">confirmed password is required.</small>
+  }
+    @if (confirmPassword.hasError("minlength")) {
+    <small class="text-danger">confirmed password must be at least 6 chars.</small>
+  }
+    @if (confirmPassword.hasError("maxlength")) {
+    <small class="text-danger">confirmded password must be no more than 30 chars.</small>
+  }
+</div>}
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign Up</button>
+  </form>
+</div>
+<app-footer></app-footer>

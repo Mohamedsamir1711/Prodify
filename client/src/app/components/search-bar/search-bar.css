@@ -1,0 +1,17 @@
+
+.nav-sty{
+    color: #00008B !important; /* Your dark blue */
+    font-weight: 700;
+    padding: 8px 16px !important; /* Adds space for the shadow to breathe */
+    border-radius: 6px;           /* Rounds the corners of the hover box */
+    transition: all 0.3s ease;    /* Smooth transition for color and shadow */
+}
+
+/* 2. Hover Effect */
+.nav-sty:hover {
+    color: #0056b3 !important;    /* Slightly lighter blue on hover */
+    background-color: #ffffff;    
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+}

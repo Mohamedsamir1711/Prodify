@@ -1,0 +1,19 @@
+<div class="col" [ngStyle]="{'width' : productDetails ? '50%' : '100%',
+'margin': productDetails ? '0 auto' : ''}">
+  <div class="card custom-product-card" [ngStyle] = "{
+  'display': productDetails ? 'flex' : 'block'}"appChangeBg>
+    <div class="img-container">
+      <img [src]="product.image" class="card-img-top object-fit-cover" alt="{{ product.name }}"/>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <h6 class="card-title">{{ product.category }}</h6>
+      <p class='card-text' appPipe [product]="product" [trunc]="50"></p>
+      <h5 class="card-title">{{ product.price }} USD</h5>
+
+      <div class="d-flex gap-2 mt-5">
+        <ng-content></ng-content>
+      </div>
+    </div>  
+  </div>
+</div>

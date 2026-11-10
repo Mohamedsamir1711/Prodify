@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <h1 class="text-center mt-4 mb-4">Products</h1>
+  <app-search-bar (searchEvent)="searching($event)" class="d-block mb-4"></app-search-bar>
+  <div class="row">
+    <div class="col-3 gap-3">
+      <app-filter class="mb-5" (filterEvent)="filtering($event)"></app-filter>
+      <app-sort class="mt-5" (sortEvent)="sorting($event)"></app-sort>
+    </div>
+    <div class="col-9">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @for (p of product; track p._id) {
+          <app-card [product]="p">
+            <a [routerLink]="['/products', p._id]" class="btn btn-primary">Show More</a>
+          </app-card>
+        } @empty {
+          <h1 class="text-center w-100 text-primary my-4">No products found</h1>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<app-pagination
+  class="d-block mt-5"
+  [total]="total"
+  (paginationEvent)="pagination($event)"
+></app-pagination>
+
+<app-footer></app-footer>

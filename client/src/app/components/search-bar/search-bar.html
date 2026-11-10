@@ -1,0 +1,17 @@
+<nav class="navbar bg-transparent">
+  <div class="container-fluid col-8 d-flex justify-content-center">
+    <form class="d-flex input-group w-100">
+      <input
+        type="search"
+        name="search"
+        class="form-control col-8 d-flex justify-content-center nav-sty"
+        placeholder="Search for products"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        style="border-radius: 50px"
+        [(ngModel)]="search"
+        (input)="sendValue()"
+      />
+    </form>
+  </div>
+</nav>

@@ -1,0 +1,87 @@
+<!-- Navbar -->
+<nav class="navv navbar navbar-expand-lg  p-3 pt-5 pb-5">
+  <!-- Container wrapper -->
+  <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+    <!-- Toggle button -->
+    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link fw-bold nav-sty bg-primary rounded px-3 py-2 me-2 text-white" routerLinkActive="fw-bold"
+            routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold nav-sty bg-primary rounded px-3 py-2 me-2 text-white" routerLinkActive="fw-bold"
+            routerLink="/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold nav-sty bg-primary rounded px-3 py-2 me-2 text-white" routerLinkActive="fw-bold"
+            routerLink="admin/dashboard">Dashboard</a>
+        </li>
+
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+    <a class="navbar-brand col-8 d-flex justify-content-center mt-lg-0 logo" href="#">
+      <img src="./prodify.png" height="300" alt="prodify Logo" loading="lazy" />
+    </a>
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="#">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+
+      <!-- Notifications -->
+      <div class="dropdown">
+        <a data-bs-toggle="dropdown" class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
+          id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+          <i class="fas fa-bell"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" data-bs-toggle="dropdown">
+          <li>
+            <a class="dropdown-item" href="#">Some news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+          role="button" aria-expanded="false" data-bs-toggle="dropdown">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
+            alt="Black and White Portrait of a Man" loading="lazy" data-bs-toggle="dropdown" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+          <li>
+            <a class="dropdown-item" routerLink="/settings" routerLinkActive="fw-bold">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/settings" routerLinkActive="fw-bold">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/auth/login" routerLinkActive="fw-bold">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Right elements -->
+  <!-- Container wrapper -->
+</nav>
