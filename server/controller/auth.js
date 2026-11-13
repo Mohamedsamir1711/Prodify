@@ -29,7 +29,8 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
     try {
         await sendEmail(email, 'Confirm your Email', '', `Your OTP is: ${OTP}`);
-    } catch {
+    } catch (err) {
+        console.error('Email error:', err.message);
         await User.findByIdAndDelete(user._id);
         return next(new AppError(503, 'Could not send confirmation email. Check email configuration and try again.'));
     }
