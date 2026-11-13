@@ -1,23 +1,51 @@
-<div class='p-4 shadow border border-1 border-primary rounded-3 mt-5' style="background-color: rgb(207, 231, 252);">
-  <h4 class="text-center text-primary mb-4">Sort by Name and Price</h4>
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="radio" name="sort" id="name" value="name" (change)="sorting()" [(ngModel)]="sort">
-    <label class="form-check-label" for="name">
-      Name (A-Z)    </label>
-  </div>
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="radio" name="sort" id="-name" value="-name" (change)="sorting()" [(ngModel)]="sort">
-    <label class="form-check-label" for="-name">
-      Name (Z-A)    </label>
-  </div>
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="radio" name="sort" id="price" value="price" (change)="sorting()" [(ngModel)]="sort">
-    <label class="form-check-label" for="price">
-      Price (low to high) </label>
-  </div>
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="radio" name="sort" id="-price" value="-price" (change)="sorting()" [(ngModel)]="sort">
-    <label class="form-check-label" for="-price">
-      Price (high to low) </label>
-  </div>
+<div class="pd-panel pd-sort-panel">
+  <h4 class="pd-panel-title">Sort by</h4>
+
+  <label class="pd-radio-option" for="sort-name-asc">
+    <input
+      type="radio"
+      name="sort"
+      id="sort-name-asc"
+      value="name"
+      [(ngModel)]="sort"
+      (change)="sorting()"
+    />
+    <span>Name (A-Z)</span>
+  </label>
+
+  <label class="pd-radio-option" for="sort-name-desc">
+    <input
+      type="radio"
+      name="sort"
+      id="sort-name-desc"
+      value="-name"
+      [(ngModel)]="sort"
+      (change)="sorting()"
+    />
+    <span>Name (Z-A)</span>
+  </label>
+
+  <label class="pd-radio-option" for="sort-price-asc">
+    <input
+      type="radio"
+      name="sort"
+      id="sort-price-asc"
+      value="price"
+      [(ngModel)]="sort"
+      (change)="sorting()"
+    />
+    <span>Price (low to high)</span>
+  </label>
+
+  <label class="pd-radio-option" for="sort-price-desc">
+    <input
+      type="radio"
+      name="sort"
+      id="sort-price-desc"
+      value="-price"
+      [(ngModel)]="sort"
+      (change)="sorting()"
+    />
+    <span>Price (high to low)</span>
+  </label>
 </div>

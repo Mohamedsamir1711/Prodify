@@ -1,0 +1,225 @@
+.pd-checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: start;
+}
+
+.pd-checkout-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pd-checkout-block {
+  padding: 26px;
+}
+
+.pd-step-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pd-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--pd-teal);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-grid;
+  place-items: center;
+}
+
+.pd-form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pd-form-grid-3 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr;
+  gap: 16px;
+}
+
+.pd-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.pd-choice-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--pd-line);
+  border-radius: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.pd-choice-card input {
+  accent-color: var(--pd-teal);
+}
+
+.pd-choice-card.selected {
+  border-color: var(--pd-teal);
+  background: var(--pd-teal-soft);
+}
+
+.pd-choice-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--pd-ink);
+}
+
+.pd-choice-sub {
+  font-size: 12px;
+  color: var(--pd-muted);
+}
+
+.pd-pay-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pd-pay-info-box {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--pd-bg);
+  font-size: 13.5px;
+  color: var(--pd-ink-2);
+}
+
+/* Right summary */
+.pd-checkout-summary {
+  position: sticky;
+  top: 88px;
+  padding: 24px;
+}
+
+.pd-mini-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.pd-mini-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-mini-row img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #ece8e1;
+}
+
+.pd-mini-meta {
+  flex: 1 1 auto;
+}
+
+.pd-mini-name {
+  font-family: var(--pd-serif);
+  font-size: 14px;
+  color: var(--pd-ink);
+}
+
+.pd-mini-qty {
+  font-size: 12px;
+  color: var(--pd-muted);
+}
+
+.pd-mini-price {
+  font-size: 13px;
+  color: var(--pd-ink);
+}
+
+.pd-summary-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pd-summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  color: var(--pd-ink-2);
+}
+
+.pd-summary-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.pd-total-num {
+  font-family: var(--pd-serif);
+  font-size: 24px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.pd-total-cur {
+  font-size: 11px;
+  color: var(--pd-muted);
+}
+
+/* Confirmation card */
+.pd-order-confirmed {
+  max-width: 620px;
+  margin: 56px auto 0;
+  padding: 48px 36px;
+  text-align: center;
+}
+
+.pd-confirm-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--pd-teal);
+  color: #ffffff;
+  font-size: 24px;
+  display: inline-grid;
+  place-items: center;
+  margin-bottom: 18px;
+}
+
+.pd-confirm-title {
+  font-size: 32px;
+  margin: 4px 0 14px;
+}
+
+.pd-confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 920px) {
+  .pd-checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-form-grid-2,
+  .pd-form-grid-3,
+  .pd-choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,22 +1,60 @@
-/* Footer dark theme styling */
-footer {
-  background-color: #212529 !important;
-  color: #e9ecef;
+.pd-footer {
+  background: #141f27;
+  color: rgba(255, 255, 255, 0.72);
+  padding: 52px 20px 38px;
+  margin-top: auto;
 }
 
-footer a.text-light {
-  color: #e9ecef !important;
-  transition: color 0.3s ease;
+.pd-footer-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-footer a.text-light:hover {
-  color: #ffffff !important;
+.pd-footer-brand {
+  display: inline-block;
+  margin-bottom: 24px;
 }
 
-footer .btn-link {
-  border: none;
+.pd-footer-logo {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.94;
 }
 
-footer .btn-link:hover {
-  opacity: 0.8;
+.pd-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.pd-footer-links a {
+  font-family: var(--pd-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pd-footer-links a:hover {
+  color: #ffffff;
+}
+
+.pd-footer-rule {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.09);
+  margin: 0 auto 24px;
+}
+
+.pd-footer-copy {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.52);
 }

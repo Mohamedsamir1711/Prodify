@@ -1,0 +1,47 @@
+.pd-orders-card {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-order-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: var(--pd-bg);
+  border: 1px solid var(--pd-line);
+}
+
+.pd-order-num {
+  font-family: var(--pd-serif);
+  font-size: 17px;
+  color: var(--pd-ink);
+}
+
+.pd-badge-status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--pd-teal-soft);
+  color: var(--pd-teal);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pd-order-amt {
+  font-family: var(--pd-serif);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+@media (max-width: 680px) {
+  .pd-order-row {
+    grid-template-columns: 1fr auto;
+  }
+}
+

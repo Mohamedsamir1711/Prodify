@@ -1,0 +1,116 @@
+<section class="pd-deals-section">
+  <div class="pd-deals-head">
+    <div>
+      <span class="pd-eyebrow">LIMITED TIME OFFERS</span>
+      <h2 class="pd-title">Featured deals</h2>
+    </div>
+    <div class="pd-deals-arrows">
+      <button
+        type="button"
+        class="pd-icon-btn"
+        (click)="prevSlide()"
+        aria-label="Previous deal"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button
+        type="button"
+        class="pd-icon-btn"
+        (click)="nextSlide()"
+        aria-label="Next deal"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Dark Featured Deal Banner -->
+  <div class="pd-deal-stage">
+    <!-- Top Bar: Discount Pill & Cart Icon -->
+    <div class="pd-deal-topbar">
+      <span class="pd-deal-discount">{{ activeDeal.discountBadge }}</span>
+
+      <button
+        type="button"
+        class="pd-deal-cart-btn"
+        (click)="buyDeal(activeDeal)"
+        title="Add deal to cart"
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path
+            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+          ></path>
+        </svg>
+        <span class="pd-deal-cart-count">
+          {{ cartService.totalItems() || 1 }}
+        </span>
+      </button>
+    </div>
+
+    <!-- Banner Image + Overlay Controls -->
+    <div class="pd-deal-media-wrap">
+      <img
+        [src]="activeDeal.image"
+        [alt]="activeDeal.titleLine1 + ' ' + activeDeal.titleLine2"
+        class="pd-deal-img"
+      />
+
+      <!-- Bottom-left CTA & Bottom-right Price Overlay -->
+      <div class="pd-deal-overlay-bottom">
+        <button
+          type="button"
+          class="pd-deal-buy-btn"
+          [style.background]="activeDeal.btnColor"
+          (click)="buyDeal(activeDeal)"
+        >
+          BUY NOW
+        </button>
+
+        <div class="pd-deal-price-tag">
+          <span class="pd-deal-old-price">${{ activeDeal.oldPrice }}</span>
+          <span class="pd-deal-new-price">${{ activeDeal.price }}</span>
+        </div>
+      </div>
+
+      <!-- Right Slide Number Indicators -->
+      <div class="pd-deal-side-nums">
+        @for (d of deals; track d.id; let idx = $index) {
+          <button
+            type="button"
+            class="pd-side-num"
+            [class.active]="idx === currentIndex"
+            (click)="goToSlide(idx)"
+          >
+            <span class="pd-side-bar"></span>
+            <span>{{ idx + 1 }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Bottom Slide Dots -->
+    <div class="pd-deal-dots">
+      @for (d of deals; track d.id; let idx = $index) {
+        <button
+          type="button"
+          class="pd-dot"
+          [class.active]="idx === currentIndex"
+          (click)="goToSlide(idx)"
+          [attr.aria-label]="'Slide ' + (idx + 1)"
+        ></button>
+      }
+    </div>
+  </div>
+</section>
+

@@ -1,75 +1,24 @@
-<div class="p-4 shadow border border-1 border-primary rounded-3" style="background-color: rgb(207, 231, 252);">
-  <h4 class="text-center text-primary mb-4">Filter by Category</h4>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="all" id="all" class="btn-check" checked>
-<label for="all" class="btn btn-outline-primary ms-2">All</label>
+<div class="pd-panel pd-filter-panel">
+  <h4 class="pd-panel-title">Category</h4>
+  <div class="pd-chip-group">
+    @for (cat of visibleCategories; track cat.value) {
+      <button
+        type="button"
+        class="pd-chip"
+        [class.active]="filter === cat.value"
+        (click)="selectCategory(cat.value)"
+      >
+        {{ cat.label }}
+      </button>
+    }
   </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="electronics" id="electronics" class="btn-check">
-<label for="electronics" class="btn btn-outline-primary ms-2 gab-3">Electronics</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="accessories" id="accessories" class="btn-check">
-<label for="accessories" class="btn btn-outline-primary ms-2">Accessories</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="mobile" id="mobile" class="btn-check">
-<label for="mobile" class="btn btn-outline-primary ms-2">Mobile</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="audio" id="audio" class="btn-check">
-<label for="audio" class="btn btn-outline-primary ms-2">Audio</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="fashion" id="fashion" class="btn-check">
-<label for="fashion" class="btn btn-outline-primary ms-2">Fashion</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="furniture" id="furniture" class="btn-check">
-<label for="furniture" class="btn btn-outline-primary ms-2">Furniture</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter"  (change)="filtering()"value="home" id="home" class="btn-check">
-<label for="home" class="btn btn-outline-primary ms-2">Home</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="fitness" id="fitness" class="btn-check">
-<label for="fitness" class="btn btn-outline-primary ms-2">Fitness</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="kitchen" id="kitchen" class="btn-check">
-<label for="kitchen" class="btn btn-outline-primary ms-2">Kitchen</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="photography" id="photography" class="btn-check">
-<label for="photography" class="btn btn-outline-primary ms-2">Photography</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="stationery" id="stationery" class="btn-check">
-<label for="stationery" class="btn btn-outline-primary ms-2">Stationery</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="outdoors" id="outdoors" class="btn-check">
-<label for="outdoors" class="btn btn-outline-primary ms-2">Outdoors</label>
-  </div>
-  <div class="mb-3">
-    <input type="radio" [(ngModel)]="filter" name="filter" (change)="filtering()" value="wearables" id="wearables" class="btn-check">
-<label for="wearables" class="btn btn-outline-primary ms-2">Wearables</label>
-  </div>
+  @if (categories.length > 7) {
+    <button
+      type="button"
+      class="pd-more-cats"
+      (click)="showAllCategories = !showAllCategories"
+    >
+      {{ showAllCategories ? 'Show fewer' : '+ More categories' }}
+    </button>
+  }
 </div>
-
-
-
- <!-- <option value="electronics">Electronics</option>
-      <option value="accessories">Accessories</option>
-      <option value="mobile">Mobile</option>
-      <option value="audio">Audio</option>
-      <option value="fashion">Fashion</option>
-      <option value="furniture">Furniture</option>
-      <option value="home">Home</option>
-      <option value="fitness">Fitness</option>
-      <option value="kitchen">Kitchen</option>
-      <option value="photography">Photography</option>
-      <option value="stationery">Stationery</option>
-      <option value="outdoors">Outdoors</option>
-      <option value="wearables">Wearables</option> -->

@@ -1,19 +1,33 @@
-<div class="col" [ngStyle]="{'width' : productDetails ? '50%' : '100%',
-'margin': productDetails ? '0 auto' : ''}">
-  <div class="card custom-product-card" [ngStyle] = "{
-  'display': productDetails ? 'flex' : 'block'}"appChangeBg>
-    <div class="img-container">
-      <img [src]="product.image" class="card-img-top object-fit-cover" alt="{{ product.name }}"/>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
-      <h6 class="card-title">{{ product.category }}</h6>
-      <p class='card-text' appPipe [product]="product" [trunc]="50"></p>
-      <h5 class="card-title">{{ product.price }} USD</h5>
+<div
+  class="pd-product-card"
+  [class.pd-product-card-details]="productDetails"
+>
+  <div class="pd-card-media">
+    <img
+      [src]="product?.image || 'assets/fontawesome/images/2.png'"
+      [alt]="product?.name || 'Product'"
+      class="pd-card-img"
+      loading="lazy"
+    />
+  </div>
+  <div class="pd-card-body">
+    <span class="pd-card-cat">{{ product?.category || 'Collection' }}</span>
+    <h5 class="pd-card-title">{{ product?.name }}</h5>
+    <p
+      class="pd-card-desc"
+      appPipe
+      [product]="product"
+      [trunc]="productDetails ? 350 : 72"
+    ></p>
 
-      <div class="d-flex gap-2 mt-5">
+    <div class="pd-card-footer">
+      <div class="pd-card-price">
+        <span class="pd-price-num">{{ product?.price }}</span>
+        <span class="pd-price-cur">USD</span>
+      </div>
+      <div class="pd-card-actions">
         <ng-content></ng-content>
       </div>
-    </div>  
+    </div>
   </div>
 </div>

@@ -1,35 +1,173 @@
-body{
-    color: #8e9194;
-    background-color: #f4f6f9;
+.pd-account-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  align-items: start;
 }
-.avatar-xl img {
-    width: 110px;
+
+.pd-account-card {
+  text-align: center;
+  padding: 28px 22px;
 }
-.rounded-circle {
-    border-radius: 50% !important;
+
+.pd-account-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--pd-teal);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  display: inline-grid;
+  place-items: center;
+  margin-bottom: 12px;
 }
-img {
-    vertical-align: middle;
-    border-style: none;
+
+.pd-account-name {
+  font-size: 22px;
+  margin: 0 0 4px;
 }
-.text-muted {
-    color: #aeb0b4 !important;
+
+.pd-account-loc {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--pd-bg);
+  font-size: 11.5px;
+  color: var(--pd-muted);
+  margin-bottom: 12px;
 }
-.text-muted {
-    font-weight: 300;
+
+.pd-account-bio {
+  font-size: 13px;
+  color: var(--pd-muted);
+  line-height: 1.5;
+  margin-bottom: 18px;
 }
-.form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #4d5154;
-    background-color: #ffffff;
-    background-clip: padding-box;
-    border: 1px solid #eef0f3;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+.pd-account-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.pd-acc-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--pd-ink-2);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.pd-acc-tab i {
+  width: 18px;
+  color: var(--pd-teal);
+}
+
+.pd-acc-tab:hover {
+  background: var(--pd-bg);
+}
+
+.pd-acc-tab.active {
+  background: var(--pd-teal);
+  color: #ffffff;
+}
+
+.pd-acc-tab.active i {
+  color: #ffffff;
+}
+
+.pd-account-auth-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pd-account-body {
+  padding: 30px;
+}
+
+.pd-form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pd-form-grid-3 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr;
+  gap: 16px;
+}
+
+.pd-req-box {
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--pd-bg);
+}
+
+.pd-req-box h6 {
+  font-family: var(--pd-serif);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.pd-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--pd-line);
+  background: var(--pd-bg);
+}
+
+.pd-order-id {
+  font-family: var(--pd-serif);
+  font-size: 16px;
+  color: var(--pd-ink);
+}
+
+.pd-order-sub {
+  font-size: 12px;
+  color: var(--pd-muted);
+}
+
+.pd-status-badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--pd-teal-soft);
+  color: var(--pd-teal);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.pd-order-total {
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .pd-account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-form-grid-2,
+  .pd-form-grid-3 {
+    grid-template-columns: 1fr;
+  }
 }

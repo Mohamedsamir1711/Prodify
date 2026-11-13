@@ -1,0 +1,33 @@
+.pd-auth-card {
+  max-width: 460px;
+  margin: 48px auto 0;
+  padding: 36px 32px;
+}
+
+.pd-auth-title {
+  font-size: 30px;
+  margin: 4px 0 8px;
+}
+
+.pd-auth-footer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--pd-line);
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--pd-muted);
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pd-auth-footer a {
+  color: var(--pd-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pd-auth-footer a:hover {
+  text-decoration: underline;
+}
+

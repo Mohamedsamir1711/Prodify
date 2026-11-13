@@ -1,44 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
-import { FormsModule } from '@angular/forms';
 import { Auth } from '../../services/auth';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
-  imports: [Navbar, Footer, FormsModule],
+  standalone: true,
+  imports: [Navbar, Footer, FormsModule, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
 export class Signup {
+  user = { username: '', email: '', password: '', confirmPassword: '' };
 
-    user = {username: '', email: '', password: '', confirmPassword: ''};
+  private _auth = inject(Auth);
+  private router = inject(Router);
+  private toast = inject(ToastrService);
 
-
-    constructor(private _auth: Auth, private router: Router, private toast: ToastrService) {}
-
-
-    submit(form:any) {
-    console.log(form.value);
-
-    try {
-      if (form.valid) {
-      this._auth.signup(form.value).subscribe({
+  submit(form: any): void {
+    if (!form.valid) return;
+    this._auth.signup(form.value).subscribe({
       next: (res: any) => {
-      console.log(res);
-      localStorage.setItem('token', res.token);
-      form.reset();
-      this.toast.success('Signup successful');
-      setTimeout(() => {
-        this.router.navigate(['']);
-      }, 2000);
-    }});
-  }
-    } catch (error) {
-      this.toast.error('Signup failed, try again');
-    }
-
+        if (res?.token) {
+          localStorage.setItem('token', res.token);
+        }
+        if (res?.data) {
+          localStorage.setItem('prodify_user', JSON.stringify(res.data));
+        }
+        form.reset();
+        this.toast.success('Account created! Welcome to Prodify.');
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 1200);
+      },
+      error: (err: any) => {
+        this.toast.error(
+          err?.error?.message || 'Signup failed, please try again'
+        );
+      },
+    });
   }
 }

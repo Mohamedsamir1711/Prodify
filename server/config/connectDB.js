@@ -1,26 +1,42 @@
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 
+let cached = global.mongooseCache;
+if (!cached) cached = global.mongooseCache = { conn: null, promise: null };
+
 const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URL);
+  // إن كان الاتصال موجوداً من طلب سابق، أعد استخدامه
+  if (cached.conn) return cached.conn;
 
-    console.log(chalk.green(`MongoDB Connected: ${conn.connection.host}`));
-    console.log(chalk.blue(`Database Name: ${conn.connection.name}`));
+  if (!cached.promise) {
+    cached.promise = (async () => {
+      const conn = await mongoose.connect(process.env.MONGO_URL);
 
-    try {
-      await mongoose.connection.collection('users').dropIndex('name_1');
-      console.log(chalk.yellow('Removed legacy users.name_1 index'));
-    } catch (dropErr) {
-      if (dropErr.code !== 27) {
-        console.warn(chalk.yellow(`Legacy index cleanup: ${dropErr.message}`));
+      console.log(chalk.green(`MongoDB Connected: ${conn.connection.host}`));
+      console.log(chalk.blue(`Database Name: ${conn.connection.name}`));
+
+      try {
+        await mongoose.connection.collection('users').dropIndex('name_1');
+        console.log(chalk.yellow('Removed legacy users.name_1 index'));
+      } catch (dropErr) {
+        if (dropErr.code !== 27) {
+          console.warn(chalk.yellow(`Legacy index cleanup: ${dropErr.message}`));
+        }
       }
-    }
 
-} catch (error) {
-    console.error(chalk.red(`Error connecting to MongoDB: ${error.message}`));
-    process.exit(1);
+      return conn;
+    })();
   }
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    cached.promise = null; // للسماح بإعادة المحاولة في الطلب القادم
+    console.error(chalk.red(`Error connecting to MongoDB: ${error.message}`));
+    throw error;
+  }
+
+  return cached.conn;
 };
 
 module.exports = connectDB;

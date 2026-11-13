@@ -1,0 +1,9 @@
+.pd-paginator {
+  display: inline-flex;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 4px 12px;
+  border: 1px solid var(--pd-line);
+  box-shadow: var(--pd-shadow);
+}
+

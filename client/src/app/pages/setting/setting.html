@@ -1,110 +1,257 @@
-<app-navbar></app-navbar>
-<div class="container">
-<div class="row justify-content-center">
-    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
-        <h2 class="h3 mb-4 page-title">Settings</h2>
-        <div class="my-4">
-            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">Profile</a>
-                </li>
-            </ul>
-            <form>
-                <div class="row mt-5 align-items-center">
-                    <div class="col-md-3 text-center mb-5">
-                        <div class="avatar avatar-xl">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row align-items-center">
-                            <div class="col-md-7">
-                                <h4 class="mb-1">Brown, Asher</h4>
-                                <p class="small mb-3"><span class="badge badge-dark">New York, USA</span></p>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-md-7">
-                                <p class="text-muted">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea dictumst. Cras urna quam, malesuada vitae risus at,
-                                    pretium blandit sapien.
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
-                                <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
-                                <p class="small mb-0 text-muted">(537) 315-1481</p>
-                            </div>
-                        </div>
-                    </div>
+<div class="pd-page">
+  <app-navbar></app-navbar>
+
+  <main class="pd-main">
+    <div class="pd-container">
+      <div class="pd-page-head">
+        <span class="pd-eyebrow">PERSONAL SPACE</span>
+        <h1 class="pd-display">Account</h1>
+      </div>
+
+      <div class="pd-account-layout">
+        <!-- Left Profile Card -->
+        <aside class="pd-panel pd-account-card">
+          <div class="pd-account-avatar">AM</div>
+          <h3 class="pd-serif pd-account-name">
+            {{ profile.firstName }} {{ profile.lastName }}
+          </h3>
+          <span class="pd-account-loc">New York, USA</span>
+          <p class="pd-account-bio">{{ profile.bio }}</p>
+
+          <div class="pd-account-nav">
+            <button
+              type="button"
+              class="pd-acc-tab"
+              [class.active]="activeTab === 'profile'"
+              (click)="activeTab = 'profile'"
+            >
+              <i class="far fa-user"></i>
+              <span>Profile Details</span>
+            </button>
+            <button
+              type="button"
+              class="pd-acc-tab"
+              [class.active]="activeTab === 'orders'"
+              (click)="activeTab = 'orders'"
+            >
+              <i class="fas fa-box-open"></i>
+              <span>Orders ({{ recentOrders.length }})</span>
+            </button>
+            <button
+              type="button"
+              class="pd-acc-tab"
+              [class.active]="activeTab === 'security'"
+              (click)="activeTab = 'security'"
+            >
+              <i class="fas fa-shield-alt"></i>
+              <span>Password & Security</span>
+            </button>
+            <a routerLink="/cart" class="pd-acc-tab">
+              <i class="fas fa-shopping-bag"></i>
+              <span>Shopping Cart ({{ cartService.totalItems() }})</span>
+            </a>
+            <a routerLink="/admin/dashboard" class="pd-acc-tab">
+              <i class="fas fa-sliders-h"></i>
+              <span>Store Dashboard</span>
+            </a>
+          </div>
+
+          <hr class="pd-divider" />
+
+          <div class="pd-account-auth-links">
+            <a routerLink="/auth/login" class="pd-btn pd-btn-ghost pd-btn-sm">
+              Sign In
+            </a>
+            <a routerLink="/auth/signup" class="pd-btn pd-btn-teal pd-btn-sm">
+              Sign Up
+            </a>
+          </div>
+        </aside>
+
+        <!-- Right Tab Content -->
+        <section class="pd-panel pd-account-body">
+          @if (activeTab === 'profile') {
+            <h3 class="pd-panel-title">Profile Information</h3>
+            <form (ngSubmit)="saveProfile()">
+              <div class="pd-form-grid-2">
+                <div class="pd-field">
+                  <label class="pd-label" for="firstname">First name</label>
+                  <input
+                    id="firstname"
+                    name="firstName"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="profile.firstName"
+                  />
                 </div>
-                <hr class="my-4" />
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="firstname">Firstname</label>
-                        <input type="text" id="firstname" class="form-control" placeholder="Brown" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="lastname">Lastname</label>
-                        <input type="text" id="lastname" class="form-control" placeholder="Asher" />
-                    </div>
+                <div class="pd-field">
+                  <label class="pd-label" for="lastname">Last name</label>
+                  <input
+                    id="lastname"
+                    name="lastName"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="profile.lastName"
+                  />
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="brown@asher.me" />
+              </div>
+
+              <div class="pd-form-grid-2">
+                <div class="pd-field">
+                  <label class="pd-label" for="inputEmail4">Email address</label>
+                  <input
+                    id="inputEmail4"
+                    name="email"
+                    type="email"
+                    class="pd-input"
+                    [(ngModel)]="profile.email"
+                  />
                 </div>
-                <div class="form-group">
-                    <label for="inputAddress5">Address</label>
-                    <input type="text" class="form-control" id="inputAddress5" placeholder="P.O. Box 464, 5975 Eget Avenue" />
+                <div class="pd-field">
+                  <label class="pd-label" for="phone">Phone</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="profile.phone"
+                  />
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputCompany5">Company</label>
-                        <input type="text" class="form-control" id="inputCompany5" placeholder="Nec Urna Suscipit Ltd" />
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputState5">State</label>
-                        <select id="inputState5" class="form-control">
-                            <option selected="">Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputZip5">Zip</label>
-                        <input type="text" class="form-control" id="inputZip5" placeholder="98232" />
-                    </div>
+              </div>
+
+              <div class="pd-field">
+                <label class="pd-label" for="inputAddress5">Street Address</label>
+                <input
+                  id="inputAddress5"
+                  name="address"
+                  type="text"
+                  class="pd-input"
+                  [(ngModel)]="profile.address"
+                />
+              </div>
+
+              <div class="pd-form-grid-3">
+                <div class="pd-field">
+                  <label class="pd-label" for="inputCompany5">Company</label>
+                  <input
+                    id="inputCompany5"
+                    name="company"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="profile.company"
+                  />
                 </div>
-                <hr class="my-4" />
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="inputPassword4">Old Password</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword5">New Password</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword6">Confirm Password</label>
-                            <input type="password" class="form-control" id="inputPassword6" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="mb-2">Password requirements</p>
-                        <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
-                        <ul class="small text-muted pl-4 mb-0">
-                            <li>Minimum 8 character</li>
-                            <li>At least one special character</li>
-                            <li>At least one number</li>
-                            <li>Can’t be the same as a previous password</li>
-                        </ul>
-                    </div>
+                <div class="pd-field">
+                  <label class="pd-label" for="inputState5">State</label>
+                  <input
+                    id="inputState5"
+                    name="state"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="profile.state"
+                  />
                 </div>
-                <button type="submit" class="btn btn-primary">Save Change</button>
+                <div class="pd-field">
+                  <label class="pd-label" for="inputZip5">Postal Zip</label>
+                  <input
+                    id="inputZip5"
+                    name="zip"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="profile.zip"
+                  />
+                </div>
+              </div>
+
+              <div class="pd-form-actions">
+                <button type="submit" class="pd-btn pd-btn-dark">
+                  Save Changes
+                </button>
+              </div>
             </form>
-        </div>
+          } @else if (activeTab === 'orders') {
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="pd-panel-title mb-0">Recent Orders</h3>
+              <a routerLink="/checkout" class="pd-btn pd-btn-ghost pd-btn-sm">
+                Go to Checkout
+              </a>
+            </div>
+
+            <div class="pd-orders-list">
+              @for (ord of recentOrders; track ord.orderNumber) {
+                <div class="pd-order-item">
+                  <div>
+                    <div class="pd-order-id">{{ ord.orderNumber }}</div>
+                    <div class="pd-order-sub">
+                      {{ ord.date | slice : 0 : 10 }} ·
+                      {{ ord.itemsCount }} item(s)
+                    </div>
+                  </div>
+                  <span class="pd-status-badge">{{ ord.status }}</span>
+                  <strong class="pd-order-total">{{ ord.total }} USD</strong>
+                </div>
+              }
+            </div>
+          } @else {
+            <h3 class="pd-panel-title">Change Password</h3>
+            <form (ngSubmit)="updatePassword()">
+              <div class="pd-form-grid-2">
+                <div>
+                  <div class="pd-field">
+                    <label class="pd-label" for="oldPass">Current Password</label>
+                    <input
+                      id="oldPass"
+                      name="current"
+                      type="password"
+                      class="pd-input"
+                      [(ngModel)]="passwords.current"
+                    />
+                  </div>
+                  <div class="pd-field">
+                    <label class="pd-label" for="newPass">New Password</label>
+                    <input
+                      id="newPass"
+                      name="next"
+                      type="password"
+                      class="pd-input"
+                      [(ngModel)]="passwords.next"
+                    />
+                  </div>
+                  <div class="pd-field">
+                    <label class="pd-label" for="confPass">Confirm New Password</label>
+                    <input
+                      id="confPass"
+                      name="confirm"
+                      type="password"
+                      class="pd-input"
+                      [(ngModel)]="passwords.confirm"
+                    />
+                  </div>
+                </div>
+
+                <div class="pd-req-box">
+                  <h6>Password requirements</h6>
+                  <p class="pd-muted small">
+                    To create a new password, meet all of the following:
+                  </p>
+                  <ul class="pd-muted small mb-0">
+                    <li>Minimum 8 characters</li>
+                    <li>At least one special character</li>
+                    <li>At least one number</li>
+                    <li>Different from your previous password</li>
+                  </ul>
+                </div>
+              </div>
+
+              <button type="submit" class="pd-btn pd-btn-dark mt-2">
+                Update Password
+              </button>
+            </form>
+          }
+        </section>
+      </div>
     </div>
+  </main>
+
+  <app-footer></app-footer>
 </div>
-</div>
-<app-footer></app-footer>

@@ -1,0 +1,214 @@
+<div class="pd-page">
+  <app-navbar></app-navbar>
+
+  <main class="pd-main">
+    <div class="pd-container">
+      <div class="pd-page-head">
+        <span class="pd-eyebrow">YOUR SELECTION</span>
+        <h1 class="pd-display">Shopping Cart</h1>
+      </div>
+
+      @if (cartService.items().length > 0) {
+        <div class="pd-cart-layout">
+          <!-- Cart Items Column -->
+          <div class="pd-cart-items">
+            <div class="pd-cart-bar">
+              <span>{{ cartService.totalItems() }} items in your bag</span>
+              <button
+                type="button"
+                class="pd-clear-btn"
+                (click)="clearAll()"
+              >
+                Clear cart
+              </button>
+            </div>
+
+            @for (item of cartService.items(); track item.product._id) {
+              <div class="pd-cart-row pd-card">
+                <a
+                  [routerLink]="['/products', item.product._id]"
+                  class="pd-cart-thumb-wrap"
+                >
+                  <img
+                    [src]="item.product.image || 'assets/fontawesome/images/2.png'"
+                    [alt]="item.product.name"
+                    class="pd-cart-thumb"
+                  />
+                </a>
+
+                <div class="pd-cart-meta">
+                  <span class="pd-cart-cat">
+                    {{ item.product.category || 'Collection' }}
+                  </span>
+                  <a
+                    [routerLink]="['/products', item.product._id]"
+                    class="pd-cart-name"
+                  >
+                    {{ item.product.name }}
+                  </a>
+                  <span class="pd-cart-unit">
+                    {{ item.product.price }} USD each
+                  </span>
+                </div>
+
+                <div class="pd-cart-qty">
+                  <button
+                    type="button"
+                    (click)="updateQty(item, -1)"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span>{{ item.qty }}</span>
+                  <button
+                    type="button"
+                    (click)="updateQty(item, 1)"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div class="pd-cart-subtotal">
+                  <span class="pd-sub-num">
+                    {{ item.product.price * item.qty }}
+                  </span>
+                  <span class="pd-sub-cur">USD</span>
+                </div>
+
+                <button
+                  type="button"
+                  class="pd-cart-remove"
+                  (click)="removeItem(item.product._id, item.product.name)"
+                  aria-label="Remove item"
+                  title="Remove item"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            }
+          </div>
+
+          <!-- Order Summary Panel -->
+          <aside class="pd-cart-summary pd-panel">
+            <h3 class="pd-panel-title">Order Summary</h3>
+
+            <div class="pd-promo-box">
+              <input
+                type="text"
+                class="pd-input pd-promo-input"
+                placeholder="Promo code (e.g. PRODIFY10)"
+                [(ngModel)]="promoCode"
+              />
+              <button
+                type="button"
+                class="pd-btn pd-btn-ghost pd-btn-sm"
+                (click)="applyPromo()"
+              >
+                Apply
+              </button>
+            </div>
+
+            <div class="pd-summary-lines">
+              <div class="pd-summary-line">
+                <span>Subtotal</span>
+                <strong>{{ cartService.subtotal() }} USD</strong>
+              </div>
+              @if (discountAmount > 0) {
+                <div class="pd-summary-line pd-discount-line">
+                  <span>Promo Discount (10%)</span>
+                  <strong>−{{ discountAmount }} USD</strong>
+                </div>
+              }
+              <div class="pd-summary-line">
+                <span>Estimated Shipping</span>
+                <strong>
+                  {{
+                    cartService.shipping() === 0
+                      ? 'Free'
+                      : cartService.shipping() + ' USD'
+                  }}
+                </strong>
+              </div>
+              <div class="pd-summary-line">
+                <span>Estimated Tax (8%)</span>
+                <strong>{{ cartService.tax() }} USD</strong>
+              </div>
+            </div>
+
+            <hr class="pd-divider" />
+
+            <div class="pd-summary-total">
+              <span>Total</span>
+              <div>
+                <span class="pd-total-num">{{ finalTotal }}</span>
+                <span class="pd-total-cur">USD</span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="pd-btn pd-btn-dark pd-btn-block pd-btn-lg mt-3"
+              (click)="proceedToCheckout()"
+            >
+              <span>Proceed to Checkout</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <a
+              routerLink="/products"
+              class="pd-btn pd-btn-ghost pd-btn-block mt-2"
+            >
+              Continue shopping
+            </a>
+
+            <div class="pd-summary-note">
+              <i class="fas fa-shield-alt"></i>
+              <span>Encrypted checkout · Free returns within 30 days</span>
+            </div>
+          </aside>
+        </div>
+      } @else {
+        <!-- Empty Cart State -->
+        <div class="pd-empty-cart pd-card">
+          <div class="pd-empty-icon">
+            <i class="fas fa-shopping-bag"></i>
+          </div>
+          <h2 class="pd-serif">Your cart is currently empty</h2>
+          <p class="pd-muted">
+            Explore our collection of considered everyday goods or add one of
+            our popular essentials below.
+          </p>
+          <a routerLink="/products" class="pd-btn pd-btn-dark mt-2">
+            Explore Products
+          </a>
+
+          <div class="pd-quick-picks">
+            <span class="pd-eyebrow">POPULAR ESSENTIALS</span>
+            <div class="pd-quick-grid">
+              @for (item of recommendedProducts; track item._id) {
+                <div class="pd-quick-item">
+                  <img [src]="item.image" [alt]="item.name" />
+                  <div class="pd-quick-info">
+                    <h6>{{ item.name }}</h6>
+                    <span>{{ item.price }} USD</span>
+                  </div>
+                  <button
+                    type="button"
+                    class="pd-btn pd-btn-ghost pd-btn-sm"
+                    (click)="quickAdd(item)"
+                  >
+                    + Add
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>
+

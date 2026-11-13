@@ -3,17 +3,17 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sort',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './sort.html',
   styleUrl: './sort.css',
 })
 export class Sort {
-  sort: string = "";
+  sort = '';
 
   @Output() sortEvent: EventEmitter<string> = new EventEmitter();
 
-  sorting() {
-    console.log(this.sort);
+  sorting(): void {
     this.sortEvent.emit(this.sort);
   }
 }

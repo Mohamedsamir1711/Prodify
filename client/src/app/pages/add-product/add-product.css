@@ -1,0 +1,25 @@
+.pd-editor-card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.pd-form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pd-editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .pd-form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,154 @@
+.pd-breadcrumb {
+  padding: 28px 0 18px;
+}
+
+.pd-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pd-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pd-back-link:hover {
+  color: var(--pd-ink);
+}
+
+.pd-detail-card {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 40px;
+  padding: 32px;
+  align-items: center;
+}
+
+.pd-detail-media {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ece8e1;
+  aspect-ratio: 4 / 3;
+}
+
+.pd-detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-detail-title {
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  margin: 4px 0 14px;
+}
+
+.pd-detail-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.pd-detail-price {
+  font-family: var(--pd-serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--pd-ink);
+}
+
+.pd-detail-cur {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pd-muted);
+}
+
+.pd-stock-pill {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--pd-teal-soft);
+  color: var(--pd-teal);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.pd-detail-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--pd-ink-2);
+  margin: 0 0 24px;
+}
+
+.pd-detail-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pd-qty-box {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--pd-line);
+  border-radius: 999px;
+  background: #fff;
+  padding: 4px 8px;
+}
+
+.pd-qty-box button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: var(--pd-ink);
+  cursor: pointer;
+}
+
+.pd-qty-box span {
+  min-width: 28px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.pd-detail-add {
+  flex: 1 1 auto;
+}
+
+.pd-detail-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.pd-perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--pd-muted);
+}
+
+.pd-perk i {
+  color: var(--pd-teal);
+}
+
+.pd-detail-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .pd-detail-card {
+    grid-template-columns: 1fr;
+    padding: 22px;
+    gap: 24px;
+  }
+}
+

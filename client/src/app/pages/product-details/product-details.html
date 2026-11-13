@@ -1,12 +1,96 @@
-<app-navbar></app-navbar>
-@if (product) {
-  <app-card [product]="product" [productDetails]="productDetails">
-    <div class="d-flex justify-content-between mb-4">
-      <span class="text-bg-success p-2 rouneded-2">{{ product.price | currency }}</span>
-      <span class="text-bg-primary p-2 rouneded-2">{{ product.category }}</span>
+<div class="pd-page">
+  <app-navbar></app-navbar>
+
+  <main class="pd-main">
+    <div class="pd-container">
+      <div class="pd-breadcrumb">
+        <a routerLink="/products" class="pd-back-link">
+          <i class="fas fa-arrow-left"></i>
+          <span>Back to products</span>
+        </a>
+      </div>
+
+      @if (product) {
+        <div class="pd-detail-card pd-card">
+          <div class="pd-detail-media">
+            <img
+              [src]="product.image || 'assets/fontawesome/images/2.png'"
+              [alt]="product.name"
+              class="pd-detail-img"
+            />
+          </div>
+
+          <div class="pd-detail-info">
+            <span class="pd-eyebrow">{{ product.category || 'Collection' }}</span>
+            <h1 class="pd-serif pd-detail-title">{{ product.name }}</h1>
+
+            <div class="pd-detail-price-row">
+              <span class="pd-detail-price">{{ product.price }}</span>
+              <span class="pd-detail-cur">USD</span>
+              <span class="pd-stock-pill">
+                In stock ({{ product.quantity || 15 }} available)
+              </span>
+            </div>
+
+            <p class="pd-detail-desc">{{ product.description }}</p>
+
+            <div class="pd-detail-controls">
+              <div class="pd-qty-box">
+                <button type="button" (click)="changeQty(-1)" aria-label="Decrease quantity">
+                  −
+                </button>
+                <span>{{ qty }}</span>
+                <button type="button" (click)="changeQty(1)" aria-label="Increase quantity">
+                  +
+                </button>
+              </div>
+
+              <button
+                type="button"
+                class="pd-btn pd-btn-dark pd-detail-add"
+                (click)="addToCart()"
+              >
+                <i class="fas fa-shopping-bag"></i>
+                <span>Add to cart</span>
+              </button>
+
+              <button
+                type="button"
+                class="pd-btn pd-btn-teal"
+                (click)="buyNow()"
+              >
+                Buy now
+              </button>
+            </div>
+
+            <hr class="pd-divider" />
+
+            <div class="pd-detail-perks">
+              <div class="pd-perk">
+                <i class="fas fa-truck"></i>
+                <span>Complimentary shipping on orders over $120</span>
+              </div>
+              <div class="pd-perk">
+                <i class="fas fa-undo"></i>
+                <span>30-day considered return guarantee</span>
+              </div>
+            </div>
+
+            <div class="pd-detail-admin-actions">
+              <a
+                [routerLink]="['/products', product._id, 'edit']"
+                class="pd-btn pd-btn-ghost pd-btn-sm"
+              >
+                <i class="far fa-edit"></i>
+                <span>Edit product</span>
+              </a>
+              <app-delete-model [product]="product"></app-delete-model>
+            </div>
+          </div>
+        </div>
+      }
     </div>
-    <a [routerLink]="['/products', product._id]" class="btn btn-primary">Back to Products</a>
-    <app-delete-model [product]="product"></app-delete-model>
-  </app-card>
-}
-<app-footer class='mt-auto'></app-footer>
+  </main>
+
+  <app-footer></app-footer>
+</div>

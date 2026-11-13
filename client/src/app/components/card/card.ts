@@ -1,20 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ChangeBg} from '../../change-bg'
-import { PipeTrunc } from '../../pipe';
 import { CommonModule } from '@angular/common';
+import { PipeTrunc } from '../../pipe';
 
 @Component({
   selector: 'app-card',
-  imports: [ChangeBg, PipeTrunc, CommonModule],
+  standalone: true,
+  imports: [PipeTrunc, CommonModule],
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
 export class Card implements OnInit {
+  @Input() product!: any;
+  @Input() productDetails!: boolean;
 
-  @Input() product!:any;
-
-  @Input() productDetails!: Boolean
- 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

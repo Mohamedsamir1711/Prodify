@@ -1,0 +1,241 @@
+.pd-deals-section {
+  width: 100%;
+  margin-bottom: 44px;
+}
+
+.pd-deals-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.pd-deals-arrows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pd-deals-arrows .pd-icon-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 12px;
+  color: var(--pd-ink-2);
+}
+
+/* Dark stage card */
+.pd-deal-stage {
+  position: relative;
+  background: #1b242c;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 46px rgba(17, 25, 33, 0.22);
+  border-left: 4px solid #0ea5c6;
+}
+
+.pd-deal-topbar {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  right: 26px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.pd-deal-discount {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 15px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #16222b;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.pd-deal-cart-btn {
+  pointer-events: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.pd-deal-cart-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+.pd-deal-cart-count {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #e04f44;
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.pd-deal-media-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 28px;
+}
+
+.pd-deal-img {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  object-fit: cover;
+}
+
+.pd-deal-overlay-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6px 40px 26px 52px;
+  margin-top: -46px;
+  position: relative;
+  z-index: 2;
+}
+
+.pd-deal-buy-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 11px 32px;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(109, 53, 240, 0.42);
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+.pd-deal-buy-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.pd-deal-price-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.pd-deal-old-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #d6a461;
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+
+.pd-deal-new-price {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+/* Right side indicators */
+.pd-deal-side-nums {
+  position: absolute;
+  right: 18px;
+  top: 52%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
+}
+
+.pd-side-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.pd-side-bar {
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  transition: all 0.2s ease;
+}
+
+.pd-side-num.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pd-side-num.active .pd-side-bar {
+  width: 18px;
+  background: #14b8d4;
+}
+
+/* Bottom dots */
+.pd-deal-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 0 18px;
+}
+
+.pd-dot {
+  width: 10px;
+  height: 4px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.35);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pd-dot.active {
+  width: 26px;
+  background: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .pd-deal-overlay-bottom {
+    padding: 12px 20px 18px;
+    margin-top: 0;
+  }
+
+  .pd-deal-side-nums {
+    display: none;
+  }
+}
+

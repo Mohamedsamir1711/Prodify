@@ -1,0 +1,25 @@
+.pd-filter-panel {
+  padding: 20px 18px;
+}
+
+.pd-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pd-more-cats {
+  margin-top: 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--pd-teal);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pd-more-cats:hover {
+  text-decoration: underline;
+}
+

@@ -1,17 +1,37 @@
-<nav class="navbar bg-transparent">
-  <div class="container-fluid col-8 d-flex justify-content-center">
-    <form class="d-flex input-group w-100">
-      <input
-        type="search"
-        name="search"
-        class="form-control col-8 d-flex justify-content-center nav-sty"
-        placeholder="Search for products"
-        aria-label="Search"
-        aria-describedby="search-addon"
-        style="border-radius: 50px"
-        [(ngModel)]="search"
-        (input)="sendValue()"
-      />
-    </form>
+<div class="pd-search-wrap">
+  <div class="pd-search-box">
+    <svg
+      class="pd-search-icon"
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input
+      type="search"
+      name="search"
+      class="pd-search-input"
+      placeholder="Search for products"
+      aria-label="Search for products"
+      [(ngModel)]="search"
+      (input)="sendValue()"
+    />
+    @if (search) {
+      <button
+        type="button"
+        class="pd-search-clear"
+        (click)="clearSearch()"
+        aria-label="Clear search"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    }
   </div>
-</nav>
+</div>

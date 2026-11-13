@@ -1,0 +1,377 @@
+<div class="pd-page">
+  <app-navbar></app-navbar>
+
+  <main class="pd-main">
+    <div class="pd-container">
+      @if (!orderCompleted) {
+        <div class="pd-page-head">
+          <span class="pd-eyebrow">FINAL STEP</span>
+          <h1 class="pd-display">Checkout</h1>
+        </div>
+
+        <form
+          #checkoutForm="ngForm"
+          (ngSubmit)="placeOrder(checkoutForm)"
+          class="pd-checkout-layout"
+        >
+          <!-- Left Column: Shipping, Delivery & Payment -->
+          <div class="pd-checkout-forms">
+            <!-- Step 1: Contact & Shipping -->
+            <section class="pd-panel pd-checkout-block">
+              <div class="pd-step-head">
+                <span class="pd-step-num">1</span>
+                <h3 class="pd-panel-title mb-0">Contact & Shipping Address</h3>
+              </div>
+
+              <div class="pd-form-grid-2">
+                <div class="pd-field">
+                  <label class="pd-label" for="firstName">First name *</label>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="customer.firstName"
+                    required
+                  />
+                </div>
+                <div class="pd-field">
+                  <label class="pd-label" for="lastName">Last name *</label>
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="customer.lastName"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="pd-form-grid-2">
+                <div class="pd-field">
+                  <label class="pd-label" for="email">Email address *</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    class="pd-input"
+                    [(ngModel)]="customer.email"
+                    required
+                  />
+                </div>
+                <div class="pd-field">
+                  <label class="pd-label" for="phone">Phone number *</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    class="pd-input"
+                    [(ngModel)]="customer.phone"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="pd-field">
+                <label class="pd-label" for="address">Street address *</label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  class="pd-input"
+                  [(ngModel)]="customer.address"
+                  required
+                />
+              </div>
+
+              <div class="pd-form-grid-3">
+                <div class="pd-field">
+                  <label class="pd-label" for="city">City *</label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="customer.city"
+                    required
+                  />
+                </div>
+                <div class="pd-field">
+                  <label class="pd-label" for="state">State / Province *</label>
+                  <input
+                    id="state"
+                    name="state"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="customer.state"
+                    required
+                  />
+                </div>
+                <div class="pd-field">
+                  <label class="pd-label" for="zip">Postal code *</label>
+                  <input
+                    id="zip"
+                    name="zip"
+                    type="text"
+                    class="pd-input"
+                    [(ngModel)]="customer.zip"
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Step 2: Delivery Method -->
+            <section class="pd-panel pd-checkout-block">
+              <div class="pd-step-head">
+                <span class="pd-step-num">2</span>
+                <h3 class="pd-panel-title mb-0">Delivery Method</h3>
+              </div>
+
+              <div class="pd-choice-grid">
+                <label
+                  class="pd-choice-card"
+                  [class.selected]="shippingMethod === 'standard'"
+                >
+                  <input
+                    type="radio"
+                    name="shippingMethod"
+                    value="standard"
+                    [(ngModel)]="shippingMethod"
+                  />
+                  <div>
+                    <div class="pd-choice-title">Standard Delivery</div>
+                    <div class="pd-choice-sub">3–5 business days</div>
+                  </div>
+                  <strong class="ms-auto">
+                    {{
+                      cartService.shipping() === 0
+                        ? 'Free'
+                        : cartService.shipping() + ' USD'
+                    }}
+                  </strong>
+                </label>
+
+                <label
+                  class="pd-choice-card"
+                  [class.selected]="shippingMethod === 'express'"
+                >
+                  <input
+                    type="radio"
+                    name="shippingMethod"
+                    value="express"
+                    [(ngModel)]="shippingMethod"
+                  />
+                  <div>
+                    <div class="pd-choice-title">Express Courier</div>
+                    <div class="pd-choice-sub">1–2 business days</div>
+                  </div>
+                  <strong class="ms-auto">18 USD</strong>
+                </label>
+              </div>
+            </section>
+
+            <!-- Step 3: Payment Method -->
+            <section class="pd-panel pd-checkout-block">
+              <div class="pd-step-head">
+                <span class="pd-step-num">3</span>
+                <h3 class="pd-panel-title mb-0">Payment Details</h3>
+              </div>
+
+              <div class="pd-pay-tabs">
+                <button
+                  type="button"
+                  class="pd-chip"
+                  [class.active]="paymentMethod === 'card'"
+                  (click)="paymentMethod = 'card'"
+                >
+                  <i class="far fa-credit-card me-1"></i> Credit / Debit Card
+                </button>
+                <button
+                  type="button"
+                  class="pd-chip"
+                  [class.active]="paymentMethod === 'paypal'"
+                  (click)="paymentMethod = 'paypal'"
+                >
+                  <i class="fab fa-paypal me-1"></i> PayPal
+                </button>
+                <button
+                  type="button"
+                  class="pd-chip"
+                  [class.active]="paymentMethod === 'cod'"
+                  (click)="paymentMethod = 'cod'"
+                >
+                  <i class="fas fa-money-bill-wave me-1"></i> Cash on Delivery
+                </button>
+              </div>
+
+              @if (paymentMethod === 'card') {
+                <div class="pd-card-fields mt-3">
+                  <div class="pd-field">
+                    <label class="pd-label" for="cardName">Name on card</label>
+                    <input
+                      id="cardName"
+                      name="cardName"
+                      type="text"
+                      class="pd-input"
+                      [(ngModel)]="customer.cardName"
+                      placeholder="Asher M. Brown"
+                    />
+                  </div>
+                  <div class="pd-field">
+                    <label class="pd-label" for="cardNumber">Card number</label>
+                    <input
+                      id="cardNumber"
+                      name="cardNumber"
+                      type="text"
+                      class="pd-input"
+                      [(ngModel)]="customer.cardNumber"
+                      placeholder="4532 •••• •••• 8891"
+                    />
+                  </div>
+                  <div class="pd-form-grid-2">
+                    <div class="pd-field">
+                      <label class="pd-label" for="expiry">Expiry date</label>
+                      <input
+                        id="expiry"
+                        name="expiry"
+                        type="text"
+                        class="pd-input"
+                        [(ngModel)]="customer.expiry"
+                        placeholder="MM / YY"
+                      />
+                    </div>
+                    <div class="pd-field">
+                      <label class="pd-label" for="cvc">Security code (CVC)</label>
+                      <input
+                        id="cvc"
+                        name="cvc"
+                        type="password"
+                        class="pd-input"
+                        [(ngModel)]="customer.cvc"
+                        placeholder="•••"
+                      />
+                    </div>
+                  </div>
+                </div>
+              } @else if (paymentMethod === 'paypal') {
+                <div class="pd-pay-info-box mt-3">
+                  You will be redirected to PayPal to securely authorize your
+                  payment of <strong>{{ grandTotal }} USD</strong>.
+                </div>
+              } @else {
+                <div class="pd-pay-info-box mt-3">
+                  Pay in cash or by card directly to the courier when your
+                  package arrives at your doorstep.
+                </div>
+              }
+            </section>
+          </div>
+
+          <!-- Right Column: Order Review -->
+          <aside class="pd-checkout-summary pd-panel">
+            <h3 class="pd-panel-title">Order Review</h3>
+
+            <div class="pd-mini-items">
+              @for (item of cartService.items(); track item.product._id) {
+                <div class="pd-mini-row">
+                  <img
+                    [src]="item.product.image || 'assets/fontawesome/images/2.png'"
+                    [alt]="item.product.name"
+                  />
+                  <div class="pd-mini-meta">
+                    <div class="pd-mini-name">{{ item.product.name }}</div>
+                    <div class="pd-mini-qty">Qty: {{ item.qty }}</div>
+                  </div>
+                  <strong class="pd-mini-price">
+                    {{ item.product.price * item.qty }} USD
+                  </strong>
+                </div>
+              } @empty {
+                <p class="pd-muted small">
+                  No items in bag yet.
+                  <a routerLink="/products">Browse products</a>
+                </p>
+              }
+            </div>
+
+            <hr class="pd-divider" />
+
+            <div class="pd-summary-lines">
+              <div class="pd-summary-line">
+                <span>Subtotal</span>
+                <strong>{{ cartService.subtotal() }} USD</strong>
+              </div>
+              <div class="pd-summary-line">
+                <span>Shipping</span>
+                <strong>
+                  {{ shippingFee === 0 ? 'Free' : shippingFee + ' USD' }}
+                </strong>
+              </div>
+              <div class="pd-summary-line">
+                <span>Tax (8%)</span>
+                <strong>{{ cartService.tax() }} USD</strong>
+              </div>
+            </div>
+
+            <hr class="pd-divider" />
+
+            <div class="pd-summary-total">
+              <span>Total due</span>
+              <div>
+                <span class="pd-total-num">{{ grandTotal }}</span>
+                <span class="pd-total-cur">USD</span>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="pd-btn pd-btn-dark pd-btn-block pd-btn-lg mt-3"
+              [disabled]="cartService.items().length === 0"
+            >
+              <i class="fas fa-lock"></i>
+              <span>Place Order · {{ grandTotal }} USD</span>
+            </button>
+
+            <a
+              routerLink="/cart"
+              class="pd-btn pd-btn-ghost pd-btn-block mt-2"
+            >
+              Return to Cart
+            </a>
+          </aside>
+        </form>
+      } @else {
+        <!-- Order Confirmed Screen -->
+        <div class="pd-order-confirmed pd-card">
+          <div class="pd-confirm-badge">
+            <i class="fas fa-check"></i>
+          </div>
+          <span class="pd-eyebrow">ORDER CONFIRMED</span>
+          <h1 class="pd-serif pd-confirm-title">
+            Thank you, {{ customer.firstName }}.
+          </h1>
+          <p class="pd-muted">
+            Your order <strong>{{ orderNumber }}</strong> for
+            <strong>{{ placedTotal }} USD</strong> has been received and is
+            being prepared for dispatch to {{ customer.address }},
+            {{ customer.city }}.
+          </p>
+
+          <div class="pd-confirm-actions">
+            <a routerLink="/orders" class="pd-btn pd-btn-dark">
+              View Order History
+            </a>
+            <a routerLink="/products" class="pd-btn pd-btn-ghost">
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>
+

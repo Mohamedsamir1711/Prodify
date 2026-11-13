@@ -1,11 +1,343 @@
-/* You can add global styles to this file, and also import other style files */
-html, body {
+/* =========================================================
+   Prodify – global design system
+   ========================================================= */
+:root {
+  /* palette */
+  --pd-bg: #f5f2ed;
+  --pd-surface: #ffffff;
+  --pd-ink: #16222b;
+  --pd-ink-2: #2b3a45;
+  --pd-muted: #6b7680;
+  --pd-line: #e7e2da;
+  --pd-teal: #0f7489;
+  --pd-teal-2: #0a97b5;
+  --pd-teal-soft: #e3f1f4;
+  --pd-danger: #d6453d;
+  --pd-success: #1f8a5b;
+
+  /* type */
+  --pd-serif: 'Fraunces', 'Georgia', serif;
+  --pd-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* shape */
+  --pd-radius: 14px;
+  --pd-radius-lg: 22px;
+  --pd-shadow: 0 1px 2px rgba(22, 34, 43, .04), 0 6px 24px rgba(22, 34, 43, .06);
+  --pd-shadow-lg: 0 18px 50px rgba(22, 34, 43, .14);
+
+  --pd-container: 1120px;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
-  background-color: rgb(243, 247, 248);
+  background-color: var(--pd-bg);
+  color: var(--pd-ink);
+  font-family: var(--pd-sans);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: inherit;
+}
+
+/* ---------- layout ---------- */
+.pd-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pd-main {
+  flex: 1 0 auto;
+  padding-bottom: 80px;
+}
+
+.pd-container {
+  width: 100%;
+  max-width: var(--pd-container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- typography ---------- */
+.pd-eyebrow {
+  display: block;
+  font-family: var(--pd-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--pd-teal);
+  margin-bottom: 6px;
+}
+
+.pd-serif,
+.pd-title,
+.pd-display {
+  font-family: var(--pd-serif);
+  font-weight: 400;
+  letter-spacing: -.01em;
+  color: var(--pd-ink);
+}
+
+.pd-display {
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.pd-title {
+  font-size: clamp(1.6rem, 3vw, 1.9rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.pd-page-head {
+  text-align: center;
+  padding: 56px 0 28px;
+}
+
+.pd-page-head .pd-display {
+  font-size: clamp(2.2rem, 4.5vw, 3rem);
+}
+
+.pd-muted {
+  color: var(--pd-muted);
+}
+
+/* ---------- buttons ---------- */
+.pd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 11px 24px;
+  font-family: var(--pd-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .15s ease, box-shadow .2s ease;
+  white-space: nowrap;
+}
+
+.pd-btn:active {
+  transform: translateY(1px);
+}
+
+.pd-btn:disabled,
+.pd-btn.disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.pd-btn-dark {
+  background: var(--pd-ink);
+  color: #fff;
+}
+
+.pd-btn-dark:hover {
+  background: #0c151b;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(22, 34, 43, .25);
+}
+
+.pd-btn-teal {
+  background: var(--pd-teal);
+  color: #fff;
+}
+
+.pd-btn-teal:hover {
+  background: #0b5f71;
+  color: #fff;
+}
+
+.pd-btn-ghost {
+  background: #fff;
+  color: var(--pd-ink);
+  border-color: var(--pd-line);
+}
+
+.pd-btn-ghost:hover {
+  border-color: var(--pd-ink);
+  color: var(--pd-ink);
+}
+
+.pd-btn-danger {
+  background: #fff;
+  color: var(--pd-danger);
+  border-color: #f1cfcc;
+}
+
+.pd-btn-danger:hover {
+  background: var(--pd-danger);
+  color: #fff;
+}
+
+.pd-btn-sm {
+  padding: 8px 16px;
+  font-size: 12.5px;
+}
+
+.pd-btn-lg {
+  padding: 15px 30px;
+  font-size: 15px;
+}
+
+.pd-btn-block {
+  width: 100%;
+}
+
+.pd-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--pd-line);
+  background: #fff;
+  color: var(--pd-ink);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.pd-icon-btn:hover {
+  border-color: var(--pd-ink);
+  box-shadow: var(--pd-shadow);
+}
+
+/* ---------- surfaces ---------- */
+.pd-card {
+  background: var(--pd-surface);
+  border-radius: var(--pd-radius);
+  box-shadow: var(--pd-shadow);
+  border: 1px solid rgba(231, 226, 218, .6);
+}
+
+.pd-panel {
+  background: var(--pd-surface);
+  border-radius: var(--pd-radius);
+  box-shadow: var(--pd-shadow);
+  padding: 20px;
+}
+
+.pd-panel-title {
+  font-family: var(--pd-serif);
+  font-size: 1.1rem;
+  margin: 0 0 14px;
+  color: var(--pd-ink);
+}
+
+/* ---------- chips ---------- */
+.pd-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--pd-line);
+  background: #fff;
+  color: var(--pd-ink-2);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s ease;
+  user-select: none;
+}
+
+.pd-chip:hover {
+  border-color: var(--pd-teal);
+  color: var(--pd-teal);
+}
+
+.pd-chip.active {
+  background: var(--pd-teal);
+  border-color: var(--pd-teal);
+  color: #fff;
+}
+
+/* ---------- forms ---------- */
+.pd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.pd-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--pd-ink-2);
+}
+
+.pd-input {
+  width: 100%;
+  border: 1px solid var(--pd-line);
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--pd-ink);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.pd-input:focus {
+  border-color: var(--pd-teal);
+  box-shadow: 0 0 0 4px rgba(15, 116, 137, .12);
+}
+
+.pd-input.is-invalid {
+  border-color: var(--pd-danger);
+}
+
+.pd-error {
+  font-size: 12px;
+  color: var(--pd-danger);
+}
+
+.pd-divider {
+  height: 1px;
+  background: var(--pd-line);
+  border: 0;
+  margin: 16px 0;
+}
+
+/* ---------- badges ---------- */
+.pd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pd-ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---------- toastr polish ---------- */
+.toast-container .ngx-toastr {
+  border-radius: 14px;
+  box-shadow: var(--pd-shadow-lg);
+  font-family: var(--pd-sans);
+}
+
+/* ---------- primeng paginator polish ---------- */
+.p-paginator {
+  background: transparent !important;
+}
+
+@media (max-width: 575px) {
+  .pd-page-head {
+    padding: 36px 0 20px;
+  }
+}
