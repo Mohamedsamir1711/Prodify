@@ -33,7 +33,7 @@ app.use(async (req, res, next) => {
 
 const allowedOrigins = [
     'http://localhost:4200',
-    'https://Mohamedsamir1711.github.io',
+    'https://mohamedsamir1711.github.io',
     process.env.CLIENT_URL   // رابط الـ frontend على Vercel
 ].filter(Boolean);
 
