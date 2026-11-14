@@ -1,16 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../models/iproduct';
+import { API_URL } from '../config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
   apiLinkLocal = `http://localhost:3000/products`
-  apiLink  = 'https://prodify-back.vercel.app/products'
+  apiLink = `${API_URL}/products`
 
-  getProducts (query?: any) {
+  getProducts(query?: any) {
     let params = new HttpParams();
     if (query) {
       if (query.page) params = params.set('page', query.page);
@@ -22,19 +23,19 @@ export class ProductService {
     return this._http.get(this.apiLink, { params })
   }
 
-  getOneProduct (id: string) {
+  getOneProduct(id: string) {
     return this._http.get(`${this.apiLink}/${id}`)
   }
 
-  addProduct (product:Omit<IProduct, '_id'>) {
+  addProduct(product: Omit<IProduct, '_id'>) {
     return this._http.post(this.apiLink, product)
   }
 
-  updateProduct (id: string, product:Omit<IProduct, '_id'>) {
-    return this._http.patch(`${this.apiLink}/${id}`, product)
+  updateProduct(id: string, product: Omit<IProduct, '_id'>) {
+    return this._http.put(`${this.apiLink}/${id}`, product)
   }
 
-  deleteProduct (id: string) {
+  deleteProduct(id: string) {
     return this._http.delete(`${this.apiLink}/${id}`)
   }
 
